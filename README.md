@@ -1,5 +1,7 @@
 # Tutorial - Generative vs. Possibility Space
 
+![Generative vs. Possibility Space](http://www.possibilityspace.org/img/genspace.png)
+
 This is an interactive tool to explore the idea of generative space and possibility space, two important topics in procedural generation. Mike Cook made it as part of a series called Possibility Space (somewhat confusingly).
 
 You can find a full written tutorial with interactive Javascript examples here: http://www.possibilityspace.org/tutorial-generative-possibility-space/
