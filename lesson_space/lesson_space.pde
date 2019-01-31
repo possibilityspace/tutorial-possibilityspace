@@ -151,7 +151,18 @@ void GenerateHumanLevel(){
    theLevel = GetHumanLevel(); 
 }
 
+PImage tile_dirt;
+PImage tile_grass;
+PImage tile_box;
+
 void setup(){
+   tile_dirt = loadImage("tile_dirt.png");
+   tile_grass= loadImage("tile_grass.png");
+   tile_box = loadImage("tile_box.png");
+  
+  //Comment this line out if you like a border around each tile.
+  noStroke();
+  
   //Note: Processing only lets us use exact numbers, so this assumes 40 tiles wide + tile size of 30 px
    size(1220, 550);
    GenerateLevel(); 
@@ -177,8 +188,22 @@ void draw(){
   
   for(int i=0; i<levelWidth; i++){
      for(int j=0; j<levelHeight; j++){
+         //This selects a colour based on the tile and draws a rectangle to make the map.
          fill(GetColor(theLevel[i][j]));
          rect(tx+i*tilesize, j*tilesize+tr, tilesize, tilesize);
+         
+         //This draws nice tile sprites (thanks to Kenney!) on top of the boring coloured squares.
+         if(theLevel[i][j] == 1){
+          if((j == 0 || theLevel[i][j-1] == 0)){
+             image(tile_grass, tx+i*tilesize, j*tilesize+tr, tilesize, tilesize);
+          }
+           else{
+             image(tile_dirt, tx+i*tilesize, j*tilesize+tr, tilesize, tilesize);
+          }
+         }
+         else if(theLevel[i][j] == 2){
+            image(tile_box, tx+i*tilesize, j*tilesize+tr, tilesize, tilesize);
+         }
      }
   }
   
@@ -236,6 +261,8 @@ void draw(){
   
   text("Levels generated with this generator: "+generatorStats[generator], tilesize*levelWidth, tr+tilesize*levelHeight+60);
   text("(Press C to clear this statistic)", tilesize*levelWidth, tr+tilesize*levelHeight+90);
+  
+  text("More at www.possibilityspace.org", tilesize*levelWidth, tr+tilesize*levelHeight+160);
   
   textAlign(LEFT, CENTER);
   textSize(14);
